@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MalkaWorld - L'élégance du pagne africain</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="logo" href="assets/Logo MW.jpg">
+    <script src="script.js"></script>
+  <!-- Ajoutez ces scripts dans l'ordre -->
+<script src="config.js"></script>
+<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+
+<!-- Puis modifiez votre script de paiement -->
+<script>
+// Initialisation de FedaPay avec la configuration
+FedaPay.init({
+    public_key: FEDAPAY_CONFIG.IS_SANDBOX ? FEDAPAY_CONFIG.SANDBOX_PUBLIC_KEY : FEDAPAY_CONFIG.PUBLIC_KEY,
+    environment: FEDAPAY_CONFIG.IS_SANDBOX ? 'sandbox' : 'production'
+});
+
+</script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="assets/Logo MW.jpg" alt="Logo MalkaWorld" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 8px;">
+                MalkaWorld
+            </div>
+            <ul>
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="catalogue.html">Catalogue</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                
+                <li
+                <div class="panier-icon" onclick="togglePanier()">
+                    <img src="assets/panier.png" alt="Panier" style="width: 30px; height: 30px;">
+                    <span class="panier-count">0</span>
+                </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="article-detail">
+        <article class="motifs-article">
+            <!-- Hero Section -->
+            <div class="article-hero">
+                <img src="assets/pagne kente bleu roi.jpg"  alt="Motifs traditionnels africains">
+                <div class="article-meta">
+                    <span class="date"><i class="far fa-calendar"></i> 15 Mars 2024</span>
+                    <span class="author"><i class="far fa-user"></i> Par Sarah Koné</span>
+                    <span class="read-time"><i class="far fa-clock"></i> 10 min de lecture</span>
+                </div>
+                <h1>Les Motifs Traditionnels et leurs Significations</h1>
+                <h2 class="subtitle">Plongée dans l'Histoire Fascinante des Symboles Africains</h2>
+            </div>
+
+            <!-- Introduction -->
+            <div class="article-content">
+                <p class="intro">
+                    L'Afrique est un continent aux multiples cultures et traditions, et ses motifs traditionnels sont bien plus que de simples dessins. Chaque symbole, chaque couleur, et chaque motif raconte une histoire, transmet une sagesse ancestrale ou honore une croyance profondément ancrée.
+                </p>
+
+                <!-- Section 1 -->
+                <section class="article-section">
+                    <h2>L'Art de la Symbolique : Bien Plus Qu'une Esthétique</h2>
+                    <div class="section-content">
+                        <img src="assets/pagne kente bleu géométrique.jpg" alt="Art symbolique africain">
+                        <p>Dans les cultures africaines, les motifs et les symboles sont porteurs de messages subtils. Ils servent non seulement à orner les tissus, les sculptures, ou les bijoux, mais aussi à transmettre des valeurs et des traditions de génération en génération.</p>
+                    </div>
+                </section>
+
+                <!-- Section Adinkra -->
+                <section class="article-section adinkra-section">
+                    <h2>Les Motifs Adinkra : Un Langage Ancien du Ghana</h2>
+                    <div class="adinkra-symbols">
+                        <div class="symbol-card">
+                            <img src="assets/Soie bogolan gris.jpg" alt="Symbole Gye Nyame">
+                            <h3>Gye Nyame</h3>
+                            <p>"Sauf Dieu" - Symbole de l'omnipotence divine</p>
+                        </div>
+                        <div class="symbol-card">
+                            <img src="assets/Soie lisse duo orange 🍊.jpg" alt="Symbole Sankofa">
+                            <h3>Sankofa</h3>
+                            <p>"Retourne et prends-le" - L'importance du passé</p>
+                        </div>  
+                        <div class="symbol-card">
+                            <img src="assets/Soie motif jungle bleu.jpg" alt="Symbole Fawohodie">
+                            <h3>Fawohodie</h3>
+                            <p>"Indépendance" - Liberté et choix personnel</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Pagne -->
+                <section class="article-section pagne-section">
+                    <h2>Les Motifs du Pagne : Une Identité Marquée</h2>
+                    <div class="motif-gallery">
+                        <div class="motif-item">
+                            <img src="assets/Soie lisse gris.jpg" alt="Motif Wouya Wouya">
+                            <div class="motif-info">
+                                <h3>Wouya Wouya</h3>
+                                <p>Protection contre les mauvaises langues</p>
+                            </div>
+                        </div>
+                        <div class="motif-item">
+                            <img src="assets/Soie bogolan bleu.jpg" alt="Motif Aya">
+                            <div class="motif-info">
+                                <h3>Aya (Fougère)</h3>
+                                <p>Endurance et résilience</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section Couleurs -->
+                <section class="article-section colors-section">
+                    <h2>Les Couleurs : Un Langage Universel</h2>
+                    <div class="color-meanings">
+                        <div class="color-item" style="background-color: #000000">
+                            <h3>Noir</h3>
+                            <p>Spiritualité et maturité</p>
+                        </div>
+                        <div class="color-item" style="background-color: #FF0000">
+                            <h3>Rouge</h3>
+                            <p>Force et passion</p>
+                        </div>
+                        <div class="color-item" style="background-color: #4a0dbd">
+                            <h3>Blanc</h3>
+                            <p>Pureté et paix</p>
+                        </div>
+                        <div class="color-item" style="background-color: #FFD700">
+                            <h3>Or</h3>
+                            <p>Richesse et prospérité</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Conclusion -->
+                <section class="article-section conclusion">
+                    <h2>Conclusion : Préserver et Célébrer l'Héritage</h2>
+                    <p>Les motifs traditionnels africains ne sont pas seulement des formes et des couleurs ; ils sont des messagers du passé, des gardiens de valeurs et de croyances précieuses.</p>
+                    <div class="cta-box">
+                        <h3>Découvrez Notre Collection</h3>
+                        <p>Explorez nos pagnes aux motifs traditionnels</p>
+                        <a href="catalogue.html" class="cta-button">Voir la Collection</a>
+                    </div>
+                </section>
+
+                <!-- Partage Social -->
+                <div class="social-share">
+                    <h3>Partagez cet Article</h3>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="share-btn pinterest"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Articles Similaires -->
+        <aside class="related-articles">
+            <h2>Articles Similaires</h2>
+            <div class="related-grid">
+                <!-- Articles similaires ici -->
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="contact">
+                <h3>Contactez-nous</h3>
+                <p>Email: contact@malkaword.com</p>
+                <p>Tél: +229 01 67 03 06 44</p>
+            </div>
+            <div class="social">
+                <h3>Suivez-nous</h3>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animation au défilement
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.article-section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>

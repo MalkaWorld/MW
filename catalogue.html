@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MalkaWorld - L'élégance du pagne africain</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="logo" href="assets/Logo MW.jpg">
+    <script src="script.js"></script>
+ </head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">MalkaWorld</div>
+            <ul>
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="catalogue.html">Catalogue</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <div class="panier-icon" onclick="togglePanier()">
+                    <img src="assets/panier.png" alt="Panier" style="width: 30px; height: 30px;">
+                    <span class="panier-count">0</span>
+                </div>
+                <!-- Structure du panier dropdown dans la nav -->
+                <div id="panier-dropdown" class="panier-dropdown">
+                    <div id="panier-contenu"></div>
+                    <div class="panier-total">
+                    <p>Total: <span id="panier-total">0</span> F. CFA</p>
+                        <button onclick="procederAuPaiement()" class="btn-paiement">Procéder au paiement</button>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="catalogue">
+        <h1>Nos Pépites pour vous</h1>
+        <h2 style="text-align: center;">Découvrez notre collection complète</h2>
+            
+        <div class="filtres-container">
+            <button onclick="filtrerProduits('couleur', 'rouge')" class="filtre-btn">Rouge</button>
+            <button onclick="filtrerProduits('couleur', 'bleu')" class="filtre-btn">Bleu</button>
+            <button onclick="filtrerProduits('couleur', 'rose')" class="filtre-btn">Rose</button>
+            <button onclick="filtrerProduits('couleur', 'jaune')" class="filtre-btn">Jaune</button>
+            <button onclick="filtrerProduits('couleur', 'gris')" class="filtre-btn">Gris</button>
+            <button onclick="filtrerProduits('couleur', 'vert')" class="filtre-btn">Vert</button>
+            <button onclick="resetFiltres()" class="filtre-btn reset">Tout afficher</button>
+        </div>
+       
+        <style>
+            .filtres-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                margin-bottom: 2rem;
+                justify-content: center;
+            }
+
+            .filtre-btn {
+                padding: 0.5rem 1rem;
+                border: 1px solid #ddd;
+                border-radius: 20px;
+                background: white;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .filtre-btn:hover {
+                background: #e67e22;
+                color: white;
+                border-color: #e67e22;
+            }
+
+            .filtre-btn.reset {
+                background: #f39c12;
+                color: white;
+                border-color: #f39c12;
+            }
+        </style>
+        <div class="produits">
+            <!-- Produits -->
+            <div class="produit-card">
+                <img src="assets/pagne kente bleu foncé.jpg" alt="Soie">
+                <h3>Pagne Kente</h3>
+                <p>Bleu foncé</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne kente bleu foncé.jpg',
+                    nom: 'Pagne Kente', 
+                    description: 'Bleu foncé',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/pagne kente bleu vert.jpg" alt="Soie">
+                <h3>Pagne Kente</h3>
+                <p>Bleu vert</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne kente bleu vert.jpg',
+                    nom: 'Pagne Kente', 
+                    description: 'Bleu vert',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/pagne kente vert.jpg" alt="Soie">
+                <h3>Pagne Kente</h3>
+                <p>Vert</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne kente vert.jpg',
+                    nom: 'Pagne Kente', 
+                    description: 'Vert',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+           
+            <div class="produit-card">
+                <img src="assets/pagne kente bleu roi.jpg" alt="Soie">
+                <h3>Pagne Kente</h3>
+                <p>Bleu roi</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne kente bleu roi.jpg',
+                    nom: 'Pagne Kente', 
+                    description: 'Bleu roi',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/pagne kente bleu rose.jpg" alt="Soie">
+                <h3>Pagne Kente</h3>
+                <p>Bleu rose</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne kente bleu rose.jpg',
+                    nom: 'Pagne Kente', 
+                    description: 'Bleu rose',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/pagne kente bleu pur.jpg" alt="Soie">
+                <h3>Pagne Kente</h3>
+                <p>Bleu pur</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne kente bleu pur.jpg',
+                    nom: 'Pagne Kente', 
+                    description: 'Bleu pur',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/pagne kente violet.jpg" alt="Soie">
+                <h3>Pagne Kente</h3>
+                <p>Violet</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne kente violet.jpg',
+                    nom: 'Pagne Kente', 
+                    description: 'Violet',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/pagne kente bleu jaune.jpg" alt="Soie">
+                <h3>Pagne Kente</h3>
+                <p>bleu jaune</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne kente bleu jaune.jpg',
+                    nom: 'Pagne Kente', 
+                    description: 'bleu jaune',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/pagne kente rose.jpg" alt="Soie">
+                <h3>Pagne Kente</h3>
+                <p>Orange</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne kente violet.jpg',
+                    nom: 'Pagne Kente', 
+                    description: 'orange',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/pagne kente bleu géométrique.jpg" alt="Soie">
+                <h3>Pagne Kente</h3>
+                <p>Bleu géométrique</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne kente violet.jpg',
+                    nom: 'Pagne Kente', 
+                    description: 'Bleu géométrique',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/pagne kente jaune.jpg" alt="Soie">
+                <h3>Pagne Kente</h3>
+                <p>Jaune</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne kente violet.jpg',
+                    nom: 'Pagne Kente', 
+                    description: 'Jaune',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie bogolan bleu.jpg" alt="Soie">
+                <h3>Soie Bogolan</h3>
+                <p>Bleu</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie bogolan bleu.jpg',
+                    nom: 'Soie Bogolan', 
+                    description: 'Bleu',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie bogolan gris.jpg" alt="Soie">
+                <h3>Soie Bogolan</h3>
+                <p>Gris</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie bogolan marron.jpg',
+                    nom: 'Soie Bogolan', 
+                    description: 'Gris',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie bogolan vert.jpg" alt="Soie">
+                <h3>Soie Bogolan</h3>
+                <p>Vert</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie bogolan jaune.jpg',
+                    nom: 'Soie Bogolan', 
+                    description: 'Jaune',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie jaune dégradé.jpg" alt="Soie">
+                <h3>Soie</h3>
+                <p>Jaune dégradé</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie jaune dégradé.jpg',
+                    nom: 'Soie Bogolan', 
+                    description: 'Jaune dégradé',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                    <img src="assets/Soie lisse bleu jaune.jpg" alt="Soie">
+                <h3>Soie</h3>
+                <p>Bleu jaune</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie lisse bleu jaune.jpg',
+                    nom: 'Soie', 
+                    description: 'Bleu jaune',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie lisse bleu jaune.jpg" alt="Soie">
+                <h3>Soie</h3>
+                <p>Bleu jaune</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie lisse bleu marron.jpg',
+                    nom: 'Soie', 
+                    description: 'Bleu jaune',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie lisse dégradé bleu clair.jpg" alt="Soie">
+                <h3>Soie</h3>
+                <p>Bleu clair</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie lisse dégradé bleu clair.jpg',
+                    nom: 'Soie', 
+                    description: 'Bleu clair',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie lisse duo jaune poussin.jpg" alt="Soie">
+                <h3>Soie</h3>
+                <p>Jaune poussin</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie lisse duo jaune poussin.jpg',
+                    nom: 'Soie', 
+                    description: 'Jaune poussin',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie lisse duo orange 🍊.jpg" alt="Soie">
+                <h3>Soie</h3>
+                <p>Orange 🍊</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie lisse duo orange 🍊.jpg',
+                    nom: 'Soie', 
+                    description: 'Orange 🍊',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie lisse gris.jpg" alt="Soie">
+                <h3>Soie lisse</h3>
+                <p>Gris</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie lisse gris.jpg',
+                    nom: 'Soie lisse', 
+                    description: 'Gris',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie lisse rose-noir.jpg" alt="Soie">
+                <h3>Soie lisse</h3>
+                <p>Noir</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie lisse rose-noir.jpg',
+                    nom: 'Soie lisse', 
+                    description: 'Noir',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie motif jungle bleu.jpg" alt="Soie">
+                <h3>Soie lisse</h3>
+                <p>Bleu</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie motif jungle bleu.jpg',
+                    nom: 'Soie lisse', 
+                    description: 'Bleu',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie motif pagne blanc-bleu.jpg" alt="Soie">
+                <h3>Soie pagne</h3>
+                <p>Bleu</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie motif pagne blanc-bleu.jpg',
+                    nom: 'Soie pagne', 
+                    description: 'Bleu',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie motif pagne bleu clair.jpg" alt="Soie">
+                <h3>Soie pagne</h3>
+                <p>Bleu clair</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie motif pagne bleu clair.jpg',
+                    nom: 'Soie pagne', 
+                    description: 'Bleu clair',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie motif pagne bleu.jpg" alt="Soie">
+                <h3>Soie pagne</h3>
+                <p>Bleu</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie motif pagne bleu.jpg',
+                    nom: 'Soie pagne', 
+                    description: 'Bleu',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie motif pagne jaune or.jpg" alt="Soie">
+                <h3>Soie pagne</h3>
+                <p>Jaune or</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie motif pagne jaune or.jpg',
+                    nom: 'Soie pagne', 
+                    description: 'Jaune or',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie motif pagne jaune.jpg" alt="Soie">
+                <h3>Soie pagne</h3>
+                <p>Jaune</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie motif pagne jaune.jpg',
+                    nom: 'Soie pagne', 
+                    description: 'Jaune',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie motif pagne jaune.jpg" alt="Soie">
+                <h3>Soie pagne</h3>
+                <p>Jaune</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne1 (31).jpg',
+                    nom: 'Soie pagne', 
+                    description: 'Jaune',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie motif pagne rose bonbon.jpg" alt="Soie">
+                <h3>Soie pagne</h3>
+                <p>Rose bonbon</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie motif pagne rose bonbon.jpg',
+                    nom: 'Soie pagne', 
+                    description: 'Rose bonbon',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie motif pagne saumon.jpg" alt="Soie">
+                <h3>Soie pagne</h3>
+                <p>Saumon</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie motif pagne saumon.jpg',
+                    nom: 'Soie pagne', 
+                    description: 'Saumon',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie motif pagne vert.jpg" alt="Soie">
+                <h3>Soie pagne</h3>
+                <p>Vert</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie motif pagne vert.jpg',
+                    nom: 'Soie pagne', 
+                    description: 'Vert',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie motif pagne violet.jpg" alt="Soie">
+                <h3>Soie pagne</h3>
+                <p>Violet</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie motif pagne violet.jpg',
+                    nom: 'Soie pagne', 
+                    description: 'Violet',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Sunslik bleu.jpg" alt="Soie">
+                <h3>Soie Elégance</h3>
+                <p>Bleu</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Sunslik bleu.jpg',
+                    nom: 'Soie Elégance', 
+                    description: 'Bleu',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Sunslik Rose.jpg" alt="Soie">
+                <h3>Soie Elégance</h3>
+                <p>Jaune</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Sunslik Rose.jpg',
+                    nom: 'Soie Elégance', 
+                    description: 'Jaune',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Sunslik rose-noir.jpg" alt="Soie">
+                <h3>Soie Elégance</h3>
+                <p>Noir</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Sunslik rose-noir.jpg',
+                    nom: 'Soie Elégance', 
+                    description: 'Noir',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Sunslik rouge.jpg" alt="Soie">
+                <h3>Soie Elégance</h3>
+                <p>Rouge</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Sunslik rouge.jpg',
+                    nom: 'Soie Elégance', 
+                    description: 'Rouge',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Sunslik violet.jpg" alt="Soie">
+                <h3>Soie Elégance</h3>
+                <p>Violet</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Sunslik violet.jpg',
+                    nom: 'Soie Elégance', 
+                    description: 'Violet',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie plissée bleu.jpg" alt="Soie">
+                <h3>Soie plissée</h3>
+                <p>Bleu</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie plissée bleu.jpg',
+                    nom: 'Soie plissée', 
+                    description: 'Bleu',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie plissée jaune.jpg" alt="Soie">
+                <h3>Soie plissée</h3>
+                <p>Jaune</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie plissée jaune.jpg',
+                    nom: 'Soie plissée', 
+                    description: 'Jaune',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie plissée rouge jaune.jpg" alt="Soie">
+                <h3>Soie plissée</h3>
+                <p>Rouge jaune</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie plissée rouge jaune.jpg',
+                    nom: 'Soie plissée', 
+                    description: 'Rouge jaune',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie plissée rouge-blanc.jpg" alt="Soie">
+                <h3>Soie plissée</h3>
+                <p>Rouge blanc</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie plissée rouge-blanc.jpg',
+                    nom: 'Soie plissée', 
+                    description: 'Rouge blanc',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie plissée vert.jpg" alt="Soie">
+                <h3>Soie plissée</h3>
+                <p>Vert</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie plissée vert.jpg',
+                    nom: 'Soie plissée', 
+                    description: 'Vert',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie plissée violet.jpg" alt="Soie">
+                <h3>Soie plissée</h3>
+                <p>Violet</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie plissée violet.jpg',
+                    nom: 'Soie plissée', 
+                    description: 'Violet',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie rose dégradé.jpg" alt="Soie">
+                <h3>Soie Elégance</h3>
+                <p>Rose dégradé</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie rose dégradé.jpg',
+                    nom: 'Soie Elégance', 
+                    description: 'Rose dégradé',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>  <div class="produit-card">
+                <img src="assets/Soie rouge dégradé.jpg" alt="Soie">
+                <h3>Soie Elégance</h3>
+                <p>Rouge dégradé</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie rouge dégradé.jpg',
+                    nom: 'Soie Elégance', 
+                    description: 'Rouge dégradé',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie violet dégradé.jpg" alt="Soie">
+                <h3>Soie Elégance</h3>
+                <p>Violet dégradé</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/pagne1 (48).jpg',
+                    nom: 'Soie Elégance', 
+                    description: 'Violet dégradé',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Soie vert dégradé.jpg" alt="Soie">
+                <h3>Soie Elégance</h3>
+                <p>Vert dégradé</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Soie vert dégradé.jpg',    
+                    nom: 'Soie Elégance', 
+                    description: 'vert dégradé',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Collection wendia.jpg" alt="Soie">
+                <h3>Collection Wendia</h3>
+                <p>Géométrique</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Collection wendia.jpg',
+                    nom: 'Collection Wendia', 
+                    description: 'Géométrique',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Collection  fenou.jpg" alt="Soie">
+                <h3>Collection Fenou</h3>
+                <p>Douceur</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Collection  fenou.jpg',
+                    nom: 'Collection Fenou', 
+                    description: 'Douceur',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Collection  soie artisanale.jpg" alt="Soie">
+                <h3>Collection Soie artisanale</h3>
+                <p>Tradition</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Collection  soie artisanale.jpg',
+                    nom: 'Collection Soie artisanale', 
+                    description: 'Tradition',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Collection amazone.jpg" alt="Soie">
+                <h3>Collection Amazone</h3>
+                <p>Vivacité</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Collection amazone.jpg',
+                    nom: 'Collection Amazone', 
+                    description: 'Vivacité',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Collection cica.jpg" alt="Soie">
+                <h3>Collection Cica</h3>
+                <p>Précieuse</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Collection cica.jpg',
+                    nom: 'Collection Cica', 
+                    description: 'Précieuse',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Collection soie avogan.jpg" alt="Soie">
+                <h3>Collection Soie avogan</h3>
+                <p>Force</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Collection soie avogan.jpg',
+                    nom: 'Collection Soie avogan', 
+                    description: 'Soie authentique',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+            <div class="produit-card">
+                <img src="assets/Collection douce fleur.jpg" alt="Soie">
+                <h3>Collection Douce fleur</h3>
+                <p>Floral</p>
+                <p class="prix">6000 F. CFA</p>
+                <button class="ajouter-panier" onclick="ajouterAuPanier({
+                    image: 'assets/Collection douce fleur.jpg',
+                    nom: 'Collection Douce fleur', 
+                    description: 'Floral',
+                    prix: 6000
+                })">Ajouter au panier</button>
+            </div>
+
+<style>
+ /* Style pour le panier dropdown */
+.panier-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    min-width: 300px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+            
+.panier-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.panier-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+            
+.btn-paiement {
+    background: #e67e22;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+            
+.btn-paiement:hover {
+    background: #d35400;
+}
+</style>
+            
+<script>
+            // Variables globales
+            let panier = JSON.parse(localStorage.getItem('panier')) || [];
+            
+            // Fonction pour ajouter un produit au panier
+            function ajouterAuPanier(produit) {
+                panier.push(produit);
+                localStorage.setItem('panier', JSON.stringify(panier));
+                mettreAJourPanier();
+                mettreAJourCompteurPanier();
+            }
+            
+            // Mettre à jour le compteur du panier
+            function mettreAJourCompteurPanier() {
+                const compteur = document.querySelector('.panier-count');
+                if (compteur) compteur.textContent = panier.length;
+            }
+            
+            // Fonction pour afficher le contenu du panier
+            function mettreAJourPanier() {
+                const panierContenu = document.getElementById('panier-contenu');
+                const panierTotal = document.getElementById('panier-total');
+            
+                panierContenu.innerHTML = '';
+                let total = 0;
+            
+                panier.forEach((item, index) => {
+                    const element = document.createElement('div');
+                    element.className = 'panier-item';
+                    element.innerHTML = `
+                        <img src="${item.image}" alt="${item.nom}">
+                        <div>
+                            <h4>${item.nom}</h4>
+                            <p>${item.description}</p>
+                            <p>${item.prix} F. CFA</p>
+                        </div>
+                        <button onclick="supprimerDuPanier(${index})">Supprimer cet article</button>
+                    `;
+                    panierContenu.appendChild(element);
+                    total += item.prix;
+                });
+            
+                panierTotal.textContent = total;
+            }
+            
+            // Fonction pour supprimer un produit du panier
+            function supprimerDuPanier(index) {
+                panier.splice(index, 1);
+                localStorage.setItem('panier', JSON.stringify(panier));
+                mettreAJourPanier();
+                mettreAJourCompteurPanier();
+            }
+            
+            // Fonction pour ouvrir le dropdown du panier
+            function togglePanier() {
+                const panierDropdown = document.getElementById('panier-dropdown');
+                panierDropdown.style.display = panierDropdown.style.display === 'block' ? 'none' : 'block';
+                mettreAJourPanier();
+            }
+            
+            // Fonction pour procéder au paiement
+            function procederAuPaiement() {
+                if (panier.length === 0) {
+                    alert('Votre panier est vide');
+                    return;
+                }
+                window.location.href = 'paiement.html';
+            }
+            
+            // Fermer le panier si on clique en dehors
+            document.addEventListener('click', function(event) {
+                const panierDropdown = document.getElementById('panier-dropdown');
+                const panierIcon = document.querySelector('.panier-icon');
+                if (!panierDropdown.contains(event.target) && !panierIcon.contains(event.target)) {
+                    panierDropdown.style.display = 'none';
+                }
+            });
+            
+            // Initialiser le panier au chargement de la page
+            document.addEventListener('DOMContentLoaded', function() {
+                mettreAJourPanier();
+                mettreAJourCompteurPanier();
+            });
+            // ... existing code ...
+
+
+// Ajouter ces nouvelles fonctions
+function filtrerProduits(type, valeur) {
+    const produits = document.querySelectorAll('.produit-card');
+    
+    produits.forEach(produit => {
+        const description = produit.querySelector('p').textContent.toLowerCase();
+        if (description.includes(valeur.toLowerCase())) {
+            produit.style.display = 'block';
+        } else {
+            produit.style.display = 'none';
+        }
+    });
+}
+
+function resetFiltres() {
+    const produits = document.querySelectorAll('.produit-card');
+    produits.forEach(produit => {
+        produit.style.display = 'block';
+    });
+}
+
+</script>
+</div> <!-- Fermeture de la div "produits" -->
+</section>
+
+<footer>    
+<div class="footer-content">
+    <div class="contact">
+        <h3>Contactez-nous</h3>
+        <p>Email: contact@malkaword.com</p>
+        <p>Tél: +229 01 67 03 06 44</p>
+    </div>
+    <div class="social">
+        <h3>Suivez-nous</h3>
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">Pinterest</a>
+    </div>
+</div>
+</footer>
+
+<style>
+footer {
+    background-color: #333;
+    color: white;
+    padding: 2rem 0;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.contact, .social {
+    margin: 1rem;
+}
+
+.social a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin: 0.5rem 0;
+}
+
+.social a:hover {
+    color: #e67e22;
+}
+</style>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MalkaWorld - L'élégance du pagne africain</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="logo" href="assets/Logo MW.jpg">
+    <script src="script.js"></script>
+  <!-- Ajoutez ces scripts dans l'ordre -->
+<script src="config.js"></script>
+<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+
+<!-- Puis modifiez votre script de paiement -->
+<script>
+// Initialisation de FedaPay avec la configuration
+FedaPay.init({
+    public_key: FEDAPAY_CONFIG.IS_SANDBOX ? FEDAPAY_CONFIG.SANDBOX_PUBLIC_KEY : FEDAPAY_CONFIG.PUBLIC_KEY,
+    environment: FEDAPAY_CONFIG.IS_SANDBOX ? 'sandbox' : 'production'
+});
+
+// ... reste du code ...
+</script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="assets/Logo MW.jpg" alt="Logo MalkaWorld" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 8px;">
+                MalkaWorld
+            </div>
+            <ul>
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="catalogue.html">Catalogue</a></li>
+                <li><a href="blog.html">Blog</a></li>
+               
+                <li
+                <div class="panier-icon" onclick="togglePanier()">
+                    <img src="assets/panier.png" alt="Panier" style="width: 30px; height: 30px;">
+                    <span class="panier-count">0</span>
+                </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <section id="blog">
+        <h2>Conseils & Inspirations</h2>
+        <div class="articles">
+            <article>
+                <img src="assets/Collection fifa.jpg" alt="Article blog">
+                <h3>Comment entretenir votre pagne en soie</h3>
+                <p>Découvrez nos conseils d'experts pour préserver sa beauté...</p>
+                <a href="Comment entretenir votre pagne en soie.html">Lire plus</a>
+            </article>
+      
+        <article>
+            <img src="assets/Collection violet.jpg" alt="Article blog">
+            <h3>Les motifs traditionnels et leur signification</h3>
+            <p>Plongez dans l'histoire fascinante des symboles africains...</p>
+            <a href="les motifs traditionnels et leurs significations.html">Lire plus</a>
+        </article>
+
+        <article>
+            <img src="assets/Collection gnonnou.jpg" alt="Article blog">
+            <h3>Comment porter le pagne de façon moderne</h3>
+            <p>Nos idées stylées pour un look contemporain...</p>
+            <a href="comment porter le pagne de façon moderne.html">Lire plus</a>
+        </article>
+
+        <article>
+            <img src="assets/pagne kente.jpg" alt="Article blog">
+            <h3>Les tendances pagne 2024</h3>
+            <p>Les couleurs et motifs qui feront sensation cette année...</p>
+            <a href="les tendances pagne 2024.html">Lire plus</a>
+        </article>
+    </div>
+    <div class="about-cta">
+        <a href="catalogue.html" class="btn">Découvrir nos collections</a>
+    </div>
+</section>
+<section id="temoignages">
+    <h2>Nos clients nous font confiance</h2>
+    <div class="temoignages-slider">
+        <div class="temoignage">
+            <img src="assets/about.jpg" alt="Client">
+            <p>"Une qualité exceptionnelle et des motifs magnifiques!"</p>
+            <span>- Marie A.</span>
+        </div>
+        <div class="temoignage">
+                <img src="assets/client2.jpg" alt="Client">
+                <p>"Les pagnes en soie de MalkaWorld m'ont rappelé mon héritage avec une touche de modernité. Ils sont élégants et tellement agréables à porter. J’adore leur couleur éclatante et la sensation luxueuse de la soie."</p>
+                <span>- Meryem.</span>
+        </div>
+        <div class="temoignage">
+                <img src="assets/client.jpg" alt="Client">
+                <p>"J’ai été séduite par la beauté des pagnes en soie MalkaWorld. Ce qui me plaît le plus, c’est la manière dont ils célèbrent l’art africain tout en restant modernes et raffinés. C’est rare de trouver une telle qualité et une si belle combinaison de cultures."</p>
+                <span>- Juana A.</span>
+        </div>
+        <div class="temoignage">
+                <img src="assets/client3.jpg" alt="Client">
+                <p>"Une qualité exceptionnelle et des motifs magnifiques!"</p>
+                <span>- Meryem.</span>
+        </div>
+        <div class="temoignage">
+                <img src="assets/client4.jpg" alt="Client">
+                <p>"Les pagnes en soie de MalkaWorld sont incroyables. La soie est douce et agréable sur la peau, et les motifs sont à couper le souffle. J’apprécie particulièrement l’idée de porter une pièce qui rend hommage aux traditions africaines avec un tissu aussi noble."</p>
+                <span>Sabiratou A.</span>
+        </div>
+    </div>
+    <div class="about-cta">
+        <a href="catalogue.html" class="btn">Découvrir nos collections</a>
+    </div>
+</section>    
+ <footer>
+        <div class="footer-content">
+            <div class="contact">
+                <h3>Contactez-nous</h3>
+                <p>Email: contact@malkaword.com</p>
+                <p>Tél: +229 01 67 03 06 44</p>
+            </div>
+            <div class="social">
+                <h3>Suivez-nous</h3>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

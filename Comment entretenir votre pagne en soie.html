@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MalkaWorld - L'élégance du pagne africain</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="logo" href="assets/Logo MW.jpg">
+    <script src="script.js"></script>
+  <!-- Ajoutez ces scripts dans l'ordre -->
+<script src="config.js"></script>
+<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+
+<!-- Puis modifiez votre script de paiement -->
+<script>
+// Initialisation de FedaPay avec la configuration
+FedaPay.init({
+    public_key: FEDAPAY_CONFIG.IS_SANDBOX ? FEDAPAY_CONFIG.SANDBOX_PUBLIC_KEY : FEDAPAY_CONFIG.PUBLIC_KEY,
+    environment: FEDAPAY_CONFIG.IS_SANDBOX ? 'sandbox' : 'production'
+});
+
+// ... reste du code ...
+</script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="assets/Logo MW.jpg" alt="Logo MalkaWorld" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 8px;">
+                MalkaWorld
+            </div>
+            <ul>
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="catalogue.html">Catalogue</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                
+                <li
+                <div class="panier-icon" onclick="togglePanier()">
+                    <img src="assets/panier.png" alt="Panier" style="width: 30px; height: 30px;">
+                    <span class="panier-count">0</span>
+                </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="article-detail">
+        <article>
+            <div class="article-hero">
+                <img src="C:\Users\narci\OneDrive\Bureau\MalkaWorld/assets/About1.jpg" alt="Pagne en soie">
+                <h1>Comment entretenir votre pagne en soie</h1>
+                <div class="article-meta">
+                    <span class="date">03 Novembre 2024</span>
+                    <span class="author">Par Marie Claire</span>
+                </div>
+            </div>
+
+            <div class="article-content">
+                <p class="intro">
+                    Le pagne en soie est un textile précieux qui nécessite des soins particuliers pour préserver sa beauté et sa durabilité. Dans cet article, découvrez nos conseils d'experts pour l'entretien de vos pagnes en soie.
+                </p>
+
+                <h2>1. Le lavage délicat</h2>
+                <p>
+                    La soie est une fibre naturelle délicate qui demande une attention particulière lors du lavage :
+                </p>
+                <ul>
+                    <li>Lavez toujours à la main dans de l'eau froide</li>
+                    <li>Utilisez un détergent spécial soie</li>
+                    <li>Ne frottez pas le tissu, pressez-le délicatement</li>
+                </ul>
+
+                <h2>2. Le séchage approprié</h2>
+                <p>
+                    Pour préserver la qualité de votre pagne en soie, suivez ces conseils de séchage :
+                </p>
+                <ul>
+                    <li>Évitez l'exposition directe au soleil</li>
+                    <li>Séchez à plat sur une serviette propre</li>
+                    <li>Ne tordez jamais le tissu</li>
+                </ul>
+
+                <div class="conseil-box">
+                    <h3>Conseil d'expert</h3>
+                    <p>
+                        Pour raviver l'éclat de votre pagne en soie, ajoutez une cuillère à soupe de vinaigre blanc dans l'eau de rinçage.
+                    </p>
+                </div>
+
+                <h2>3. Le repassage</h2>
+                <p>
+                    Le repassage est une étape cruciale pour garder votre pagne impeccable :
+                </p>
+                <ul>
+                    <li>Repassez sur l'envers du tissu</li>
+                    <li>Utilisez le réglage "soie" de votre fer</li>
+                    <li>Repassez le tissu encore légèrement humide</li>
+                </ul>
+
+                <div class="partage-social">
+                    <h3>Partagez cet article</h3>
+                    <div class="boutons-sociaux">
+                        <a href="#" class="btn-social">Facebook</a>
+                        <a href="#" class="btn-social">Twitter</a>
+                        <a href="#" class="btn-social">Pinterest</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <aside class="articles-similaires">
+            <h2>Articles similaires</h2>
+            <div class="suggestions">
+                <!-- Cartes d'articles similaires -->
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="contact">
+                <h3>Contactez-nous</h3>
+                <p>Email: contact@malkaword.com</p>
+                <p>Tél: +229 01 67 03 06 44</p>
+            </div>
+            <div class="social">
+                <h3>Suivez-nous</h3>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

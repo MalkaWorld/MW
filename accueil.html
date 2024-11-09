@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MalkaWorld - L'élégance du pagne africain</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="logo" href="assets/Logo MW.jpg">
+    <script src="script.js"></script>
+  <!-- Ajoutez ces scripts dans l'ordre -->
+<script src="config.js"></script>
+<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+
+<!-- Puis modifiez votre script de paiement -->
+<script>
+// Initialisation de FedaPay avec la configuration
+FedaPay.init({
+    public_key: FEDAPAY_CONFIG.IS_SANDBOX ? FEDAPAY_CONFIG.SANDBOX_PUBLIC_KEY : FEDAPAY_CONFIG.PUBLIC_KEY,
+    environment: FEDAPAY_CONFIG.IS_SANDBOX ? 'sandbox' : 'production'
+});
+
+// ... reste du code ...
+</script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="assets/Logo MW.jpg" alt="Logo MalkaWorld" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 8px;">
+                MalkaWorld
+            </div>
+            <ul>
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="catalogue.html">Catalogue</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                
+                <li
+                <div class="panier-icon" onclick="togglePanier()">
+                    <img src="assets/panier.png" alt="Panier" style="width: 30px; height: 30px;">
+                    <span class="panier-count">0</span>
+                </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+<!-- Section Accueil -->
+<section id="about">
+    <h2>Bienvenu(e) dans l'univers de la soie et de l'élégance chez MalkaWorld</h2>
+
+    <div class="hero">
+        <video autoplay muted loop>
+            <source src="assets/banner-video.mp4" type="video/mp4">
+        </video>
+        <h1>L'élégance de la tradition africaine, réinventée pour vous</h1>
+    </div>
+    <div class="cta-container"></div>
+        <h2 style="text-align: center;">Découvrez notre collection complète</h2>
+        <div style="text-align: center;">
+            <a href="catalogue.html" class="cta-button">Voir plus de modèles</a>
+        </div>
+    </div>
+   
+    <div class="about-content">
+        <img src="assets/About1.jpg" alt="Bienvenue">
+        <div class="text-content">
+            <h3>L'élégance de la tradition africaine</h3>
+            <p>MalkaWorld est née d'une passion profonde pour les tissus africains et d'une vision : celle de marier l'élégance traditionnelle du pagne africain avec le raffinement de la soie. Notre voyage a commencé en 2023, avec la volonté de créer des pièces uniques qui racontent une histoire.</p>
+            <p>Chaque pagne que nous proposons est soigneusement sélectionné, alliant motifs traditionnels et qualité exceptionnelle de la soie, pour vous offrir le meilleur de l'artisanat africain.</p>
+            
+            <div class="about-values">
+                <div class="value-item">
+                    <i class="fas fa-heart"></i>
+                    <h4>Qualité</h4>
+                    <p>Des matériaux premium sélectionnés avec soin</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-globe"></i>
+                    <h4>Tradition</h4>
+                    <p>Respect des motifs et symboles ancestraux</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Durabilité</h4>
+                    <p>Une production responsable et éthique</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-star"></i>
+                    <h4>Innovation</h4>
+                    <p>Des designs modernes inspirés de la tradition</p>
+                </div>
+            </div>
+            <div class="about-cta">
+                <a href="catalogue.html" class="btn">Découvrir nos collections</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-content">
+        <div class="contact">
+            <h3>Contactez-nous</h3>
+            <p>Email: contact@malkaword.com</p>
+            <p>Tél: +229 01 67 03 06 44</p>
+        </div>
+        <div class="social">
+            <h3>Suivez-nous</h3>
+            <a href="#">Facebook</a>
+            <a href="#">Instagram</a>
+            <a href="#">Pinterest</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
