@@ -1,4 +1,12 @@
- header {
+:root {
+    --primary-color: #D4621C;     /* Orange terracotta */
+    --secondary-color: #8B4513;   /* Marron chaleureux */
+    --accent-color: #FFD700;      /* Or */
+    --text-color: #bd590c;
+    --light-color: #FFF5EB;
+    --pattern-color: #C45D3E;     /* Rouge-orangé pour les motifs */
+}
+header {
         background-color: #fff;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         position: fixed;
