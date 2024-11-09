@@ -30,6 +30,11 @@ header {
     z-index: 1000;
 }
 
+body {
+    margin: 0; /* Supprime la marge par défaut */
+    padding-top: 60px; /* Ajoute un padding égal à la hauteur du header */
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -1093,23 +1098,6 @@ header {
     padding: 10px;
     text-align: right;
 }
-.slideshow-container {
-    max-width: 50px; /* Ajustez cette valeur selon vos besoins */
-    margin: 0 auto;
-    position: sticky;
-}
-
-.slide-image {
-    width: 75%;
-    height: 50px; /* Ajustez cette valeur selon vos besoins */
-    object-fit: contain; /* Garde les proportions de l'image */
-}
-
-.slides {
-    display: display-box;
-    width: 50%;
-}
-
             .menu-toggle {
                 display: none;
                 flex-direction: column;
@@ -1155,7 +1143,7 @@ header {
             @media screen and (max-width: 768px) {
                 nav ul.active {
                     display: flex;
-                    z-index: 100;
+                    z-index: 1000;
                 }
                 
                 #about {
