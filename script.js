@@ -198,9 +198,7 @@ function afficherNotification(message) {
                 mettreAJourPanier();
                 mettreAJourCompteurPanier();
             });
-            // ... existing code ...
-
-
+        
 // Ajouter ces nouvelles fonctions
 function filtrerProduits(type, valeur) {
     const produits = document.querySelectorAll('.produit-card');
@@ -272,6 +270,61 @@ function initierPaiement() {
         })
         .catch(error => console.error('Erreur de paiement:', error));
 }
+// Ajout de la navigation dans le panier avec scroll
+function configurerPanierScroll() {
+    const panierDropdown = document.getElementById('panier-dropdown');
+    const panierContenu = panierDropdown.querySelector('.panier-contenu');
+    
+    // Ajouter des styles pour le scroll
+    panierContenu.style.maxHeight = '300px'; // Hauteur maximale
+    panierContenu.style.overflowY = 'auto';  // Scroll vertical
+    panierContenu.style.padding = '10px';
+}
+
+// Modification de la fonction supprimerDuPanier pour éviter la fermeture
+function supprimerDuPanier(index) {
+    panier.splice(index, 1);
+    localStorage.setItem('panier', JSON.stringify(panier));
+    mettreAJourPanier();
+    mettreAJourCompteurPanier();
+    // Ne pas fermer le dropdown après suppression
+}
+
+// Modification de la fonction mettreAJourPanier pour gérer le scroll
+function mettreAJourPanier() {
+    const panierDropdown = document.getElementById('panier-dropdown');
+    const panierContenu = panierDropdown.querySelector('.panier-contenu');
+    let total = 0;
+    
+    // Vider le contenu actuel
+    panierContenu.innerHTML = '';
+    
+    // Ajouter chaque produit
+    panier.forEach((produit, index) => {
+        const produitElement = document.createElement('div');
+        produitElement.className = 'panier-item';
+        produitElement.innerHTML = `
+            <span>${produit.nom} - ${produit.prix}€</span>
+            <button onclick="supprimerDuPanier(${index})" class="btn-supprimer">Supprimer</button>
+        `;
+        panierContenu.appendChild(produitElement);
+        total += parseFloat(produit.prix);
+    });
+    
+    // Mettre à jour le total
+    const totalElement = document.getElementById('panier-total');
+    totalElement.textContent = `Total: ${total.toFixed(2)}€`;
+    
+    // Configurer le scroll si nécessaire
+    configurerPanierScroll();
+}
+
+// Initialiser la configuration du scroll au chargement
+document.addEventListener('DOMContentLoaded', function() {
+    configurerPanierScroll();
+    mettreAJourPanier();
+    mettreAJourCompteurPanier();
+});
 
 // Événements DOM
 document.addEventListener('DOMContentLoaded', () => {
