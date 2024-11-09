@@ -19,10 +19,10 @@ FedaPay.init({
     environment: FEDAPAY_CONFIG.IS_SANDBOX ? 'sandbox' : 'production'
 });
 
+// ... reste du code ...
 </script>
 </head>
 <body>
-   
     <!-- Header -->
      <header>
         <nav>
@@ -93,6 +93,29 @@ FedaPay.init({
             </script>
         </nav>
     </header>
+ <style>
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+    </style>
 
     <main class="article-detail">
         <article class="motifs-article">
