@@ -24,26 +24,98 @@ FedaPay.init({
 </head>
 <body>
     <!-- Header -->
-    <header>
+     <header>
         <nav>
-            <div class="logo">
-                <img src="assets/Logo MW.jpg" alt="Logo MalkaWorld" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 8px;">
-                MalkaWorld
+            <div class="logo">MalkaWorld</div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <ul>
+            <ul class="nav-menu">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="catalogue.html">Catalogue</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                
-                <li
-                <div class="panier-icon" onclick="togglePanier()">
-                    <img src="assets/panier.png" alt="Panier" style="width: 30px; height: 30px;">
-                    <span class="panier-count">0</span>
-                </div>
+                <li>
+                    <div class="panier-icon" onclick="togglePanier()">
+                        <img src="assets/panier.png" alt="Panier" style="width: 30px; height: 30px;">
+                        <span class="panier-count">0</span>
+                    </div>
                 </li>
             </ul>
+            <style>
+                .menu-toggle {
+                    display: none;
+                    flex-direction: column;
+                    cursor: pointer;
+                    padding: 10px;
+                }
+                
+                .menu-toggle span {
+                    width: 25px;
+                    height: 3px;
+                    background-color: #333;
+                    margin: 2px 0;
+                    transition: 0.4s;
+                }
+                
+                @media screen and (max-width: 768px) {
+                    .menu-toggle {
+                        display: flex;
+                    }
+                    
+                    .nav-menu {
+                        display: none;
+                        width: 100%;
+                        position: absolute;
+                        top: 60px;
+                        left: 0;
+                        background-color: white;
+                        flex-direction: column;
+                        padding: 20px 0;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                    }
+                    
+                    .nav-menu.active {
+                        display: flex;
+                    }
+                    
+                    .nav-menu li {
+                        margin: 10px 0;
+                    }
+                }
+            </style>
+            <script>
+                function toggleMenu() {
+                    const navMenu = document.querySelector('.nav-menu');
+                    navMenu.classList.toggle('active');
+                }
+            </script>
         </nav>
     </header>
+ <style>
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+    </style>
 <!-- Section Accueil -->
 <section id="about">
     <h2>Bienvenu(e) dans l'univers de la soie et de l'élégance chez MalkaWorld</h2>
