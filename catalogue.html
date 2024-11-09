@@ -9,30 +9,77 @@
     <script src="script.js"></script>
  </head>
 <body>
+   
     <!-- Header -->
-    <header>
+     <header>
         <nav>
             <div class="logo">MalkaWorld</div>
-            <ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="catalogue.html">Catalogue</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <div class="panier-icon" onclick="togglePanier()">
-                    <img src="assets/panier.png" alt="Panier" style="width: 30px; height: 30px;">
-                    <span class="panier-count">0</span>
-                </div>
-                <!-- Structure du panier dropdown dans la nav -->
-                <div id="panier-dropdown" class="panier-dropdown">
-                    <div id="panier-contenu"></div>
-                    <div class="panier-total">
-                    <p>Total: <span id="panier-total">0</span> F. CFA</p>
-                        <button onclick="procederAuPaiement()" class="btn-paiement">Procéder au paiement</button>
+                <li>
+                    <div class="panier-icon" onclick="togglePanier()">
+                        <img src="assets/panier.png" alt="Panier" style="width: 30px; height: 30px;">
+                        <span class="panier-count">0</span>
                     </div>
-                </div>
+                </li>
             </ul>
+            <style>
+                .menu-toggle {
+                    display: none;
+                    flex-direction: column;
+                    cursor: pointer;
+                    padding: 10px;
+                }
+                
+                .menu-toggle span {
+                    width: 25px;
+                    height: 3px;
+                    background-color: #333;
+                    margin: 2px 0;
+                    transition: 0.4s;
+                }
+                
+                @media screen and (max-width: 768px) {
+                    .menu-toggle {
+                        display: flex;
+                    }
+                    
+                    .nav-menu {
+                        display: none;
+                        width: 100%;
+                        position: absolute;
+                        top: 60px;
+                        left: 0;
+                        background-color: white;
+                        flex-direction: column;
+                        padding: 20px 0;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                    }
+                    
+                    .nav-menu.active {
+                        display: flex;
+                    }
+                    
+                    .nav-menu li {
+                        margin: 10px 0;
+                    }
+                }
+            </style>
+            <script>
+                function toggleMenu() {
+                    const navMenu = document.querySelector('.nav-menu');
+                    navMenu.classList.toggle('active');
+                }
+            </script>
         </nav>
     </header>
-    
     <section id="catalogue">
         <h1>Nos Pépites pour vous</h1>
         <h2 style="text-align: center;">Découvrez notre collection complète</h2>
