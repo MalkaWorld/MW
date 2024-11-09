@@ -7,9 +7,22 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="logo" href="assets/Logo MW.jpg">
     <script src="script.js"></script>
- </head>
+  <!-- Ajoutez ces scripts dans l'ordre -->
+<script src="config.js"></script>
+<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
+
+<!-- Puis modifiez votre script de paiement -->
+<script>
+// Initialisation de FedaPay avec la configuration
+FedaPay.init({
+    public_key: FEDAPAY_CONFIG.IS_SANDBOX ? FEDAPAY_CONFIG.SANDBOX_PUBLIC_KEY : FEDAPAY_CONFIG.PUBLIC_KEY,
+    environment: FEDAPAY_CONFIG.IS_SANDBOX ? 'sandbox' : 'production'
+});
+
+// ... reste du code ...
+</script>
+</head>
 <body>
-   
     <!-- Header -->
      <header>
         <nav>
@@ -80,6 +93,29 @@
             </script>
         </nav>
     </header>
+ <style>
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        
+        .nav-menu li {
+            margin-left: 2rem;
+        }
+    </style>
     <section id="catalogue">
         <h1>Nos Pépites pour vous</h1>
         <h2 style="text-align: center;">Découvrez notre collection complète</h2>
