@@ -116,6 +116,113 @@ function afficherNotification(message) {
     setTimeout(() => notification.remove(), 2000);
 }
 
+            // Variables globales
+            let panier = JSON.parse(localStorage.getItem('panier')) || [];
+            
+            // Fonction pour ajouter un produit au panier
+            function ajouterAuPanier(produit) {
+                panier.push(produit);
+                localStorage.setItem('panier', JSON.stringify(panier));
+                mettreAJourPanier();
+                mettreAJourCompteurPanier();
+            }
+            
+            // Mettre à jour le compteur du panier
+            function mettreAJourCompteurPanier() {
+                const compteur = document.querySelector('.panier-count');
+                if (compteur) compteur.textContent = panier.length;
+            }
+            
+            // Fonction pour afficher le contenu du panier
+            function mettreAJourPanier() {
+                const panierContenu = document.getElementById('panier-contenu');
+                const panierTotal = document.getElementById('panier-total');
+            
+                panierContenu.innerHTML = '';
+                let total = 0;
+            
+                panier.forEach((item, index) => {
+                    const element = document.createElement('div');
+                    element.className = 'panier-item';
+                    element.innerHTML = `
+                        <img src="${item.image}" alt="${item.nom}">
+                        <div>
+                            <h4>${item.nom}</h4>
+                            <p>${item.description}</p>
+                            <p>${item.prix} F. CFA</p>
+                        </div>
+                        <button onclick="supprimerDuPanier(${index})">Supprimer cet article</button>
+                    `;
+                    panierContenu.appendChild(element);
+                    total += item.prix;
+                });
+            
+                panierTotal.textContent = total;
+            }
+            
+            // Fonction pour supprimer un produit du panier
+            function supprimerDuPanier(index) {
+                panier.splice(index, 1);
+                localStorage.setItem('panier', JSON.stringify(panier));
+                mettreAJourPanier();
+                mettreAJourCompteurPanier();
+            }
+            
+            // Fonction pour ouvrir le dropdown du panier
+            function togglePanier() {
+                const panierDropdown = document.getElementById('panier-dropdown');
+                panierDropdown.style.display = panierDropdown.style.display === 'block' ? 'none' : 'block';
+                mettreAJourPanier();
+            }
+            
+            // Fonction pour procéder au paiement
+            function procederAuPaiement() {
+                if (panier.length === 0) {
+                    alert('Votre panier est vide');
+                    return;
+                }
+                window.location.href = 'paiement.html';
+            }
+            
+            // Fermer le panier si on clique en dehors
+            document.addEventListener('click', function(event) {
+                const panierDropdown = document.getElementById('panier-dropdown');
+                const panierIcon = document.querySelector('.panier-icon');
+                if (!panierDropdown.contains(event.target) && !panierIcon.contains(event.target)) {
+                    panierDropdown.style.display = 'none';
+                }
+            });
+            
+            // Initialiser le panier au chargement de la page
+            document.addEventListener('DOMContentLoaded', function() {
+                mettreAJourPanier();
+                mettreAJourCompteurPanier();
+            });
+            // ... existing code ...
+
+
+// Ajouter ces nouvelles fonctions
+function filtrerProduits(type, valeur) {
+    const produits = document.querySelectorAll('.produit-card');
+    
+    produits.forEach(produit => {
+        const description = produit.querySelector('p').textContent.toLowerCase();
+        if (description.includes(valeur.toLowerCase())) {
+            produit.style.display = 'block';
+        } else {
+            produit.style.display = 'none';
+        }
+    });
+}
+
+function resetFiltres() {
+    const produits = document.querySelectorAll('.produit-card');
+    produits.forEach(produit => {
+        produit.style.display = 'block';
+    });
+}
+
+
 // Initialisation FedaPay
 async function initializeFedaPay() {
     try {
