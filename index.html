@@ -41,61 +41,63 @@ FedaPay.init({
                 </div>
                 </li>
             </ul>
-        </nav>
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <style>
-            .menu-toggle {
-                display: none;
-                flex-direction: column;
-                cursor: pointer;
-                padding: 10px;
-                margin-left: auto;
-            }
-            
-            .menu-toggle span {
-                width: 25px;
-                height: 3px;
-                background-color: #333;
-                margin: 2px 0;
-                transition: 0.4s;
-            }
-            
-            @media screen and (max-width: 768px) {
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <script>
+                function toggleMenu() {
+                    const navMenu = document.querySelector('nav ul');
+                    navMenu.classList.toggle('active');
+                }
+            </script>
+            <style>
                 .menu-toggle {
-                    display: flex;
-                }
-                
-                nav ul {
                     display: none;
-                    width: 100%;
-                    position: absolute;
-                    top: 60px;
-                    left: 0;
-                    background-color: white;
                     flex-direction: column;
-                    padding: 20px 0;
-                    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                    cursor: pointer;
+                    padding: 10px;
+                    margin-left: auto;
                 }
                 
-                nav ul.active {
-                    display: flex;
+                .menu-toggle span {
+                    width: 25px;
+                    height: 3px;
+                    background-color: #333;
+                    margin: 2px 0;
+                    transition: 0.4s;
                 }
                 
-                nav ul li {
-                    margin: 10px 0;
+                @media screen and (max-width: 768px) {
+                    .menu-toggle {
+                        display: flex;
+                    }
+                    
+                    nav ul {
+                        display: none;
+                        width: 100%;
+                        position: absolute;
+                        top: 60px;
+                        left: 0;
+                        background-color: white;
+                        flex-direction: column;
+                        padding: 20px 0;
+                        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                    }
+                    
+                    nav ul.active {
+                        display: flex;
+                    }
+                    
+                    nav ul li {
+                        margin: 10px 0;
+                    }
                 }
-            }
-        </style>
-        <script>
-            function toggleMenu() {
-                const navMenu = document.querySelector('nav ul');
-                navMenu.classList.toggle('active');
-            }
-        </script>
+            </style>
+    
+        </nav> 
+       
     </header>
 <!-- Section Accueil -->
 <section id="about">
