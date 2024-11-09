@@ -132,6 +132,36 @@ header {
             padding: 0.8rem 2%;
         }
     }
+/* Ajustement du header en responsive */
+@media screen and (max-width: 768px) {
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    /* Ajout de padding-top pour compenser le header fixe */
+    body {
+        padding-top: 60px; /* Ajustez cette valeur selon la hauteur de votre header */
+    }
+
+    /* Ajustement des sections pour éviter le chevauchement */
+    #about, 
+    #catalogue,
+    #blog,
+    .hero {
+        margin-top: 1rem;
+        padding-top: 2rem;
+    }
+
+    /* Ajustement spécifique pour la vidéo hero */
+    .hero {
+        height: calc(100vh - 60px); /* Soustrait la hauteur du header */
+    }
+}
+
 /* Section Héro */
 .hero {
     position: relative;
