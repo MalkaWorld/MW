@@ -7,97 +7,29 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="logo" href="assets/Logo MW.jpg">
     <script src="script.js"></script>
-  <!-- Ajoutez ces scripts dans l'ordre -->
-<script src="config.js"></script>
-<script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
-
-<!-- Puis modifiez votre script de paiement -->
-<script>
-// Initialisation de FedaPay avec la configuration
-FedaPay.init({
-    public_key: FEDAPAY_CONFIG.IS_SANDBOX ? FEDAPAY_CONFIG.SANDBOX_PUBLIC_KEY : FEDAPAY_CONFIG.PUBLIC_KEY,
-    environment: FEDAPAY_CONFIG.IS_SANDBOX ? 'sandbox' : 'production'
-});
-
-// ... reste du code ...
-</script>
-</head>
+ </head>
 <body>
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">
-                <img src="assets/Logo MW.jpg" alt="Logo MalkaWorld" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 8px;">
-                MalkaWorld
-            </div>
+            <div class="logo">MalkaWorld</div>
             <ul>
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="catalogue.html">Catalogue</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li>
                 <div class="panier-icon" onclick="togglePanier()">
                     <img src="assets/panier.png" alt="Panier" style="width: 30px; height: 30px;">
                     <span class="panier-count">0</span>
                 </div>
-                </li>
+                <!-- Structure du panier dropdown dans la nav -->
+                <div id="panier-dropdown" class="panier-dropdown">
+                    <div id="panier-articles"></div>
+                    <div id="panier-montant-total"></div>
+                    <button onclick="procederAuPaiement()" class="btn-paiement">Procéder au paiement</button>
+                    </div>
+                </div>
             </ul>
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <script>
-                function toggleMenu() {
-                    const navMenu = document.querySelector('nav ul');
-                    navMenu.classList.toggle('active');
-                }
-            </script>
-            <style>
-                .menu-toggle {
-                    display: none;
-                    flex-direction: column;
-                    cursor: pointer;
-                    padding: 10px;
-                    margin-left: auto;
-                }
-                
-                .menu-toggle span {
-                    width: 25px;
-                    height: 3px;
-                    background-color: #333;
-                    margin: 2px 0;
-                    transition: 0.4s;
-                }
-                
-                @media screen and (max-width: 768px) {
-                    .menu-toggle {
-                        display: flex;
-                    }
-                    
-                    nav ul {
-                        display: none;
-                        width: 100%;
-                        position: absolute;
-                        top: 60px;
-                        left: 0;
-                        background-color: white;
-                        flex-direction: column;
-                        padding: 20px 0;
-                        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-                    }
-                    
-                    nav ul.active {
-                        display: flex;
-                    }
-                    
-                    nav ul li {
-                        margin: 10px 0;
-                    }
-                }
-            </style>
-    
-        </nav> 
-       
+        </nav>
     </header>
     
     <section id="catalogue">
