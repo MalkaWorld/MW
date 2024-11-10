@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MalkaWorld - L'élégance du pagne africain</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="logo" href="assets/Logo MW.jpg">
+    <script src="script.js"></script>
+ </head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">MalkaWorld</div>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="catalogue.html">Catalogue</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <div class="panier-icon" onclick="togglePanier()">
+                    <img src="assets/panier.png" alt="Panier" style="width: 30px; height: 30px;">
+                    <span class="panier-count">0</span>
+                </div>
+                <!-- Structure du panier dropdown dans la nav -->
+                <div id="panier-dropdown" class="panier-dropdown">
+                    <div id="panier-contenu"></div>
+                    <div class="panier-total">
+                    <p>Total: <span id="panier-total">0</span> F. CFA</p>
+                        <button onclick="procederAuPaiement()" class="btn-paiement">Procéder au paiement</button>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="paiement-section">
+        <div class="container">
+            <h2>Finalisation de votre commande</h2>
+            
+            <div class="paiement-grid">
+                <!-- Résumé de la commande -->
+                <div class="resume-commande">
+                    <h3>Résumé de votre panier</h3>
+                    <div id="resume-panier">
+                        <!-- Le contenu du panier sera injecté ici via JavaScript -->
+                    </div>
+                    <div class="total-commande">
+                        <p>Sous-total: <span id="sous-total">0</span> F. CFA</p>
+                        <p>Frais de livraison: <span id="frais-livraison">2000</span> F. CFA</p>
+                        <h4>Total: <span id="total-final">0</span> F. CFA</h4>
+                    </div>
+                </div>
+
+                <!-- Formulaire de paiement -->
+                <div class="formulaire-paiement">
+                    <h3>Informations de livraison</h3>
+                    <form id="form-paiement">
+                        <div class="form-group">
+                            <label for="nom">Nom complet</label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telephone">Téléphone</label>
+                            <input type="tel" id="telephone" name="telephone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adresse">Adresse de livraison</label>
+                            <textarea id="adresse" name="adresse" required></textarea>
+                        </div>
+
+                        <div class="methodes-paiement">
+                            <h3>Méthode de paiement</h3>
+                            <div class="options-paiement">
+                                <button type="button" class="btn-paiement-option" data-methode="fedapay">
+                                    <img src="assets/fedapay-logo.png" alt="FedaPay">
+                                    Payer avec FedaPay
+                                </button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-confirmer">Confirmer la commande</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .paiement-section {
+            padding: 4rem 2rem;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .paiement-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .resume-commande, .formulaire-paiement {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .methodes-paiement {
+            margin-top: 2rem;
+        }
+
+        .btn-paiement-option {
+            width: 100%;
+            padding: 1rem;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-paiement-option:hover {
+            background: #f5f5f5;
+        }
+
+        .btn-confirmer {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 2rem;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .paiement-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+  <footer>
+        <div class="footer-content">
+            <div class="contact">
+                <h3>Contactez-nous</h3>
+                <p>Email: contact@malkaword.com</p>
+                <p>Tél: +229 01 67 03 06 44</p>
+            </div>
+            <div class="social">
+                <h3>Suivez-nous</h3>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Pinterest</a>
+            </div>
+        </div>
+    </footer>
