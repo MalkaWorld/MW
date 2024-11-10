@@ -137,6 +137,25 @@ function afficherNotification(message) {
             function mettreAJourPanier() {
                 const panierContenu = document.getElementById('panier-contenu');
                 const panierTotal = document.getElementById('panier-total');
+
+            // Ajout de la navigation dans le panier avec scroll
+            function configurerPanierScroll() {
+                const panierDropdown = document.getElementById('panier-dropdown');
+                const panierContenu = panierDropdown.querySelector('.panier-contenu');
+    
+    // Ajouter des styles pour le scroll
+    panierContenu.style.maxHeight = '300px'; // Hauteur maximale
+    panierContenu.style.overflowY = 'auto';  // Scroll vertical
+    panierContenu.style.padding = '10px';
+}
+
+// Modification de la fonction supprimerDuPanier pour éviter la fermeture
+function supprimerDuPanier(index) {
+    panier.splice(index, 1);
+    localStorage.setItem('panier', JSON.stringify(panier));
+    mettreAJourPanier();
+    mettreAJourCompteurPanier();
+
             
                 panierContenu.innerHTML = '';
                 let total = 0;
@@ -168,13 +187,6 @@ function afficherNotification(message) {
                 mettreAJourCompteurPanier();
             }
             
-            // Fonction pour ouvrir le dropdown du panier
-            function togglePanier() {
-                const panierDropdown = document.getElementById('panier-dropdown');
-                panierDropdown.style.display = panierDropdown.style.display === 'block' ? 'none' : 'block';
-                mettreAJourPanier();
-            }
-            
             // Fonction pour procéder au paiement
             function procederAuPaiement() {
                 if (panier.length === 0) {
@@ -183,36 +195,6 @@ function afficherNotification(message) {
                 }
                 window.location.href = 'paiement.html';
             }
-            
-            // Fermer le panier si on clique en dehors
-            document.addEventListener('click', function(event) {
-                const panierDropdown = document.getElementById('panier-dropdown');
-                const panierIcon = document.querySelector('.panier-icon');
-                if (!panierDropdown.contains(event.target) && !panierIcon.contains(event.target)) {
-                    panierDropdown.style.display = 'none';
-                }
-            });
-            
-            // Initialiser le panier au chargement de la page
-            document.addEventListener('DOMContentLoaded', function() {
-                mettreAJourPanier();
-                mettreAJourCompteurPanier();
-            });
-        
-// Ajouter ces nouvelles fonctions
-function filtrerProduits(type, valeur) {
-    const produits = document.querySelectorAll('.produit-card');
-    
-    produits.forEach(produit => {
-        const description = produit.querySelector('p').textContent.toLowerCase();
-        if (description.includes(valeur.toLowerCase())) {
-            produit.style.display = 'block';
-        } else {
-            produit.style.display = 'none';
-        }
-    });
-}
-
 function resetFiltres() {
     const produits = document.querySelectorAll('.produit-card');
     produits.forEach(produit => {
@@ -270,35 +252,6 @@ function initierPaiement() {
         })
         .catch(error => console.error('Erreur de paiement:', error));
 }
-// Ajout de la navigation dans le panier avec scroll
-function configurerPanierScroll() {
-    const panierDropdown = document.getElementById('panier-dropdown');
-    const panierContenu = panierDropdown.querySelector('.panier-contenu');
-    
-    // Ajouter des styles pour le scroll
-    panierContenu.style.maxHeight = '300px'; // Hauteur maximale
-    panierContenu.style.overflowY = 'auto';  // Scroll vertical
-    panierContenu.style.padding = '10px';
-}
-
-// Modification de la fonction supprimerDuPanier pour éviter la fermeture
-function supprimerDuPanier(index) {
-    panier.splice(index, 1);
-    localStorage.setItem('panier', JSON.stringify(panier));
-    mettreAJourPanier();
-    mettreAJourCompteurPanier();
-    // Ne pas fermer le dropdown après suppression
-}
-
-// Modification de la fonction mettreAJourPanier pour gérer le scroll
-function mettreAJourPanier() {
-    const panierDropdown = document.getElementById('panier-dropdown');
-    const panierContenu = panierDropdown.querySelector('.panier-contenu');
-    let total = 0;
-    
-    // Vider le contenu actuel
-    panierContenu.innerHTML = '';
-    
     // Ajouter chaque produit
     panier.forEach((produit, index) => {
         const produitElement = document.createElement('div');
@@ -310,10 +263,6 @@ function mettreAJourPanier() {
         panierContenu.appendChild(produitElement);
         total += parseFloat(produit.prix);
     });
-    
-    // Mettre à jour le total
-    const totalElement = document.getElementById('panier-total');
-    totalElement.textContent = `Total: ${total.toFixed(2)}€`;
     
     // Configurer le scroll si nécessaire
     configurerPanierScroll();
