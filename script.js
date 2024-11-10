@@ -37,35 +37,30 @@ function updatePanierCount() {
     }
 }
 
-// Mise à jour de l'affichage du panier
-function updatePanierAffichage() {
-    const panierContainer = document.getElementById('panier-articles');
-    const totalElement = document.getElementById('panier-montant-total');
-
-    if (!panierContainer || !totalElement) {
-        console.error('Éléments du panier non trouvés');
-        return;
-    }
-
-    panierContainer.innerHTML = '';
-    let total = 0;
-
-    panierItems.forEach((item, index) => {
+function afficherArticlesPanier() {
+    const panierArticles = document.getElementById('panier-articles');
+    let montantTotal = 0;
+    
+    panierArticles.innerHTML = '';
+    
+    panier.forEach((article, index) => {
         const articleElement = document.createElement('div');
-        articleElement.className = 'panier-item';
+        articleElement.className = 'panier-article';
         articleElement.innerHTML = `
-            <div class="panier-item-content">
-                <img src="${item.image}" alt="${item.nom}" class="panier-item-image">
-                <div class="panier-item-details">
-                    <h4>${item.nom}</h4>
-                    <p>${item.description}</p>
-                    <p class="prix">${item.prix} F. CFA</p>
-                </div>
-                <button onclick="supprimerDuPanier(${index})" class="btn-supprimer">
-                    Supprimer
-                </button>
+            <img src="${article.image}" alt="${article.nom}">
+            <div class="article-details">
+                <h4>${article.nom}</h4>
+                <p>${article.prix} F. CFA</p>
             </div>
+            <button onclick="supprimerDuPanier(${index})" class="btn-supprimer">supprimer cet article</button>
         `;
+        panierArticles.appendChild(articleElement);
+        montantTotal += parseInt(article.prix);
+    });
+    
+    document.getElementById('panier-montant-total').textContent = montantTotal + ' F. CFA';
+}
+    
         panierContainer.appendChild(articleElement);
         total += item.prix;
     });
@@ -76,11 +71,11 @@ function updatePanierAffichage() {
 
 // Suppression d'un produit
 function supprimerDuPanier(index) {
-    if (index >= 0 && index < panierItems.length) {
-        panierItems.splice(index, 1);
-        localStorage.setItem('panier', JSON.stringify(panierItems));
-        updatePanierAffichage();
-    }
+    panier.splice(index, 1);
+    localStorage.setItem('panier', JSON.stringify(panier));
+    mettreAJourCompteurPanier();
+    afficherArticlesPanier(); // Rafraîchit uniquement le contenu du panier
+}
 }
 
 // Initialisation de FedaPay
