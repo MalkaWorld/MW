@@ -1,27 +1,15 @@
-const produits = document.querySelectorAll('.produit-card');
-
-// Fonction pour filtrer les produits
-function filtrerProduits(categorie, valeur) {
-    produits.forEach(produit => {
-        const produitCategorie = produit.getAttribute(`data-${categorie}`);
-        produit.style.display = (produitCategorie === valeur) ? 'block' : 'none';
-    });
-}
-
-function resetFiltres() {
-    produits.forEach(produit => produit.style.display = 'block');
-}
-
-// Initialisation du tableau du panier
+// Variables globales
 let panierItems = JSON.parse(localStorage.getItem('panier')) || [];
 let isPanierVisible = false;
 
+// Gestion de l'affichage du panier
 function togglePanier() {
     const modal = document.getElementById('panier-modal');
     isPanierVisible = !isPanierVisible;
     modal.style.display = isPanierVisible ? 'block' : 'none';
 }
 
+// Ajout d'un produit au panier
 function ajouterAuPanier(produit) {
     if (!produit) {
         console.error('Produit invalide');
@@ -41,6 +29,7 @@ function ajouterAuPanier(produit) {
     afficherNotification('Produit ajouté au panier');
 }
 
+// Mise à jour du compteur
 function updatePanierCount() {
     const countElement = document.querySelector('.panier-count');
     if (countElement) {
@@ -48,6 +37,7 @@ function updatePanierCount() {
     }
 }
 
+// Mise à jour de l'affichage du panier
 function updatePanierAffichage() {
     const panierContainer = document.getElementById('panier-articles');
     const totalElement = document.getElementById('panier-montant-total');
@@ -64,14 +54,14 @@ function updatePanierAffichage() {
         const articleElement = document.createElement('div');
         articleElement.className = 'panier-item';
         articleElement.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-                <img src="${item.image}" alt="${item.nom}" style="width: 50px; height: 50px; object-fit: cover;">
-                <div style="margin-left: 10px; flex-grow: 1;">
-                    <h4 style="margin: 0;">${item.nom}</h4>
-                    <p style="margin: 5px 0;">${item.description}</p>
-                    <p style="margin: 0; font-weight: bold;">${item.prix} F. CFA</p>
+            <div class="panier-item-content">
+                <img src="${item.image}" alt="${item.nom}" class="panier-item-image">
+                <div class="panier-item-details">
+                    <h4>${item.nom}</h4>
+                    <p>${item.description}</p>
+                    <p class="prix">${item.prix} F. CFA</p>
                 </div>
-                <button onclick="supprimerDuPanier(${index})" style="background-color: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer;">
+                <button onclick="supprimerDuPanier(${index})" class="btn-supprimer">
                     Supprimer
                 </button>
             </div>
@@ -84,131 +74,20 @@ function updatePanierAffichage() {
     updatePanierCount();
 }
 
+// Suppression d'un produit
 function supprimerDuPanier(index) {
     if (index >= 0 && index < panierItems.length) {
         panierItems.splice(index, 1);
         localStorage.setItem('panier', JSON.stringify(panierItems));
         updatePanierAffichage();
-        updatePanierCount();
     }
 }
 
-function passerCommande() {
-    if (panierItems.length === 0) {
-        alert('Votre panier est vide!');
-        return;
-    }
-
-    const total = panierItems.reduce((sum, item) => sum + item.prix, 0);
-    alert(`Commande confirmée! Total: ${total} F. CFA`);
-    panierItems = [];
-    localStorage.removeItem('panier');
-    updatePanierAffichage();
-    togglePanier();
-}
-
-function afficherNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.textContent = message;
-    document.body.appendChild(notification);
-
-    setTimeout(() => notification.remove(), 2000);
-}
-
-            // Variables globales
-            let panier = JSON.parse(localStorage.getItem('panier')) || [];
-            
-            // Fonction pour ajouter un produit au panier
-            function ajouterAuPanier(produit) {
-                panier.push(produit);
-                localStorage.setItem('panier', JSON.stringify(panier));
-                mettreAJourPanier();
-                mettreAJourCompteurPanier();
-            }
-            
-            // Mettre à jour le compteur du panier
-            function mettreAJourCompteurPanier() {
-                const compteur = document.querySelector('.panier-count');
-                if (compteur) compteur.textContent = panier.length;
-            }
-            
-            // Fonction pour afficher le contenu du panier
-            function mettreAJourPanier() {
-                const panierContenu = document.getElementById('panier-contenu');
-                const panierTotal = document.getElementById('panier-total');
-
-            // Ajout de la navigation dans le panier avec scroll
-            function configurerPanierScroll() {
-                const panierDropdown = document.getElementById('panier-dropdown');
-                const panierContenu = panierDropdown.querySelector('.panier-contenu');
-    
-    // Ajouter des styles pour le scroll
-    panierContenu.style.maxHeight = '300px'; // Hauteur maximale
-    panierContenu.style.overflowY = 'auto';  // Scroll vertical
-    panierContenu.style.padding = '10px';
-}
-
-// Modification de la fonction supprimerDuPanier pour éviter la fermeture
-function supprimerDuPanier(index) {
-    panier.splice(index, 1);
-    localStorage.setItem('panier', JSON.stringify(panier));
-    mettreAJourPanier();
-    mettreAJourCompteurPanier();
-
-            
-                panierContenu.innerHTML = '';
-                let total = 0;
-            
-                panier.forEach((item, index) => {
-                    const element = document.createElement('div');
-                    element.className = 'panier-item';
-                    element.innerHTML = `
-                        <img src="${item.image}" alt="${item.nom}">
-                        <div>
-                            <h4>${item.nom}</h4>
-                            <p>${item.description}</p>
-                            <p>${item.prix} F. CFA</p>
-                        </div>
-                        <button onclick="supprimerDuPanier(${index})">Supprimer cet article</button>
-                    `;
-                    panierContenu.appendChild(element);
-                    total += item.prix;
-                });
-            
-                panierTotal.textContent = total;
-            }
-            
-            // Fonction pour supprimer un produit du panier
-            function supprimerDuPanier(index) {
-                panier.splice(index, 1);
-                localStorage.setItem('panier', JSON.stringify(panier));
-                mettreAJourPanier();
-                mettreAJourCompteurPanier();
-            }
-            
-            // Fonction pour procéder au paiement
-            function procederAuPaiement() {
-                if (panier.length === 0) {
-                    alert('Votre panier est vide');
-                    return;
-                }
-                window.location.href = 'paiement.html';
-            }
-function resetFiltres() {
-    const produits = document.querySelectorAll('.produit-card');
-    produits.forEach(produit => {
-        produit.style.display = 'block';
-    });
-}
-
-
-// Initialisation FedaPay
+// Initialisation de FedaPay
 async function initializeFedaPay() {
     try {
         const response = await fetch('/api/config');
         const config = await response.json();
-
         FedaPay.init({
             public_key: config.publicKey,
             environment: config.environment
@@ -218,6 +97,7 @@ async function initializeFedaPay() {
     }
 }
 
+// Initier le paiement
 function initierPaiement() {
     if (panierItems.length === 0) {
         alert('Votre panier est vide!');
@@ -252,42 +132,31 @@ function initierPaiement() {
         })
         .catch(error => console.error('Erreur de paiement:', error));
 }
-    // Ajouter chaque produit
-    panier.forEach((produit, index) => {
-        const produitElement = document.createElement('div');
-        produitElement.className = 'panier-item';
-        produitElement.innerHTML = `
-            <span>${produit.nom} - ${produit.prix}€</span>
-            <button onclick="supprimerDuPanier(${index})" class="btn-supprimer">Supprimer</button>
-        `;
-        panierContenu.appendChild(produitElement);
-        total += parseFloat(produit.prix);
-    });
-    
-    // Configurer le scroll si nécessaire
-    configurerPanierScroll();
+
+// Notification
+function afficherNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 2000);
 }
 
-// Initialiser la configuration du scroll au chargement
-document.addEventListener('DOMContentLoaded', function() {
-    configurerPanierScroll();
-    mettreAJourPanier();
-    mettreAJourCompteurPanier();
-});
-
-// Événements DOM
+// Initialisation au chargement de la page
 document.addEventListener('DOMContentLoaded', () => {
     updatePanierAffichage();
     initializeFedaPay();
 
+    // Gestion du clic en dehors du panier
     document.addEventListener('click', (event) => {
-        const panierDropdown = document.getElementById('panier-dropdown');
+        const panierModal = document.getElementById('panier-modal');
         const panierIcon = document.querySelector('.panier-icon');
 
-        if (panierDropdown && panierIcon &&
-            !panierDropdown.contains(event.target) &&
+        if (panierModal && panierIcon &&
+            !panierModal.contains(event.target) &&
             !panierIcon.contains(event.target)) {
-            panierDropdown.style.display = 'none';
+            isPanierVisible = false;
+            panierModal.style.display = 'none';
         }
     });
 });
