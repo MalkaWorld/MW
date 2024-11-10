@@ -1,83 +1,69 @@
-// Variables globales
-let panierItems = JSON.parse(localStorage.getItem('panier')) || [];
-let isPanierVisible = false;
+let panier = [];
 
-// Gestion de l'affichage du panier
 function togglePanier() {
     const modal = document.getElementById('panier-modal');
-    isPanierVisible = !isPanierVisible;
-    modal.style.display = isPanierVisible ? 'block' : 'none';
+    modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
 }
 
-// Ajout d'un produit au panier
 function ajouterAuPanier(produit) {
-    if (!produit) {
-        console.error('Produit invalide');
-        return;
-    }
-
-    panierItems.push({
-        image: produit.image,
-        nom: produit.nom,
-        description: produit.description,
-        prix: parseInt(produit.prix)
-    });
-
-    localStorage.setItem('panier', JSON.stringify(panierItems));
-    updatePanierAffichage();
-    updatePanierCount();
-    afficherNotification('Produit ajouté au panier');
+    panier.push(produit);
+    mettreAJourPanier();
+    mettreAJourCompteur();
 }
 
-// Mise à jour du compteur
-function updatePanierCount() {
-    const countElement = document.querySelector('.panier-count');
-    if (countElement) {
-        countElement.textContent = panierItems.length;
-    }
+function mettreAJourCompteur() {
+    const compteur = document.querySelector('.panier-count');
+    compteur.textContent = panier.length;
 }
 
-function afficherArticlesPanier() {
+function mettreAJourPanier() {
     const panierArticles = document.getElementById('panier-articles');
-    let montantTotal = 0;
-    
+    const panierTotal = document.getElementById('panier-montant-total');
+    let total = 0;
+
     panierArticles.innerHTML = '';
     
     panier.forEach((article, index) => {
+        total += article.prix;
+        
         const articleElement = document.createElement('div');
         articleElement.className = 'panier-article';
         articleElement.innerHTML = `
             <img src="${article.image}" alt="${article.nom}">
-            <div class="article-details">
+            <div class="panier-article-info">
                 <h4>${article.nom}</h4>
+                <p>${article.description}</p>
                 <p>${article.prix} F. CFA</p>
             </div>
-            <button onclick="supprimerDuPanier(${index})" class="btn-supprimer">supprimer cet article</button>
+            <button onclick="supprimerDuPanier(${index})">×</button>
         `;
+        
         panierArticles.appendChild(articleElement);
-        montantTotal += parseInt(article.prix);
     });
     
-    document.getElementById('panier-montant-total').textContent = montantTotal + ' F. CFA';
-}
-    
-        panierContainer.appendChild(articleElement);
-        total += item.prix;
-    });
-
-    totalElement.textContent = `${total} F. CFA`;
-    updatePanierCount();
+    panierTotal.textContent = `${total} F. CFA`;
 }
 
-// Suppression d'un produit
 function supprimerDuPanier(index) {
     panier.splice(index, 1);
-    localStorage.setItem('panier', JSON.stringify(panier));
-    mettreAJourCompteurPanier();
-    afficherArticlesPanier(); // Rafraîchit uniquement le contenu du panier
-}
+    mettreAJourPanier();
+    mettreAJourCompteur();
 }
 
+function initierPaiement() {
+    // Implémentez ici votre logique de paiement
+    alert('Redirection vers la page de paiement...');
+}
+
+// Fermer le panier si on clique en dehors
+document.addEventListener('click', (e) => {
+    const panierModal = document.getElementById('panier-modal');
+    const panierIcon = document.querySelector('.panier-icon');
+    
+    if (!panierModal.contains(e.target) && !panierIcon.contains(e.target)) {
+        panierModal.style.display = 'none';
+    }
+});
 // Initialisation de FedaPay
 async function initializeFedaPay() {
     try {
